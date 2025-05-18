@@ -12,6 +12,7 @@
       height: 100vh;
       margin: 0;
       font-family: sans-serif;
+      touch-action: pan-y;
     }
 
     .card-container {
@@ -116,48 +117,47 @@
     </div>
   </div>
 
- <script>
-  const cardContainer = document.getElementById('card-container');
-  const card = document.getElementById('card');
+  <script>
+    const cardContainer = document.getElementById('card-container');
+    const card = document.getElementById('card');
 
-  // 點擊翻轉（電腦 + 手機）
-  cardContainer.addEventListener('click', () => {
-    card.classList.toggle('flipped');
-  });
-
-  // 手機滑動翻轉
-  let startX = 0;
-  cardContainer.addEventListener('touchstart', (e) => {
-    startX = e.touches[0].clientX;
-  });
-
-  cardContainer.addEventListener('touchend', (e) => {
-    const endX = e.changedTouches[0].clientX;
-    const deltaX = endX - startX;
-
-    if (Math.abs(deltaX) > 50) {
+    // 點擊翻轉
+    cardContainer.addEventListener('click', () => {
       card.classList.toggle('flipped');
-    }
-  });
-
-  // 載入 metadata
-  fetch('metadata.json')
-    .then(response => response.json())
-    .then(data => {
-      const metadata = document.getElementById('metadata-text');
-      const content = `
-        <h3>${data.name}</h3>
-        ${data.attributes.map(attr => `
-          <p><strong>${attr.trait_type}:</strong> ${attr.value}</p>
-        `).join('')}
-        <a href="fill.html" target="_blank" class="link-button">✏️ 填寫學習歷程</a>
-      `;
-      metadata.innerHTML = content;
-    })
-    .catch(error => {
-      document.getElementById('metadata-text').innerHTML = '<p>❌ 無法載入 metadata.json</p>';
-      console.error('錯誤:', error);
     });
-</script>
+
+    // 手機滑動翻轉
+    let startX = 0;
+    document.body.addEventListener('touchstart', (e) => {
+      startX = e.touches[0].clientX;
+    }, { passive: true });
+
+    document.body.addEventListener('touchend', (e) => {
+      const endX = e.changedTouches[0].clientX;
+      const deltaX = endX - startX;
+      if (Math.abs(deltaX) > 50) {
+        card.classList.toggle('flipped');
+      }
+    });
+
+    // 載入 metadata 並顯示學生資料與學習歷程連結
+    fetch('metadata.json')
+      .then(response => response.json())
+      .then(data => {
+        const metadata = document.getElementById('metadata-text');
+        const content = `
+          <h3>${data.name}</h3>
+          ${data.attributes.map(attr => `
+            <p><strong>${attr.trait_type}:</strong> ${attr.value}</p>
+          `).join('')}
+          <a href="fill.html" target="_blank" class="link-button">✏️ 填寫學習歷程</a>
+        `;
+        metadata.innerHTML = content;
+      })
+      .catch(error => {
+        document.getElementById('metadata-text').innerHTML = '<p>❌ 無法載入 metadata.json</p>';
+        console.error('錯誤:', error);
+      });
+  </script>
 </body>
 </html>
