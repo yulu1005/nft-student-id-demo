@@ -1,10 +1,12 @@
 {
   "name": "Tamkang Student NFT #1038",
-  "description": "資訊管理學系 2021 級 NFT 學生證，由學生頭像像素化生成。",
+  "description": "NFT 學生證",
   "image": "./nft.png",
   "attributes": [
-    { "trait_type": "Department", "value": "Information Management" },
-    { "trait_type": "Year", "value": "2021" },
-    { "trait_type": "Style", "value": "Pixelated" }
+    { "trait_type": "Name", "value": "黃鹿鹿 / LU-LU Huang" },
+    { "trait_type": "Student ID", "value": "410888888" },
+    { "trait_type": "College", "value": "商管學院" },
+    { "trait_type": "Department", "value": "資訊管理學系" },
+    { "trait_type": "Enrollment Year", "value": "2021" }
   ]
 }
