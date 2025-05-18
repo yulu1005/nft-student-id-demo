@@ -83,6 +83,17 @@
     .card-back h3 {
       margin-bottom: 10px;
     }
+
+    .link-button {
+      display: inline-block;
+      margin-top: 12px;
+      padding: 8px 16px;
+      background-color: #2c3e50;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      font-size: 14px;
+    }
   </style>
 </head>
 <body>
@@ -106,14 +117,30 @@
   </div>
 
   <script>
-    // 手機點擊翻轉
     const cardContainer = document.getElementById('card-container');
     const card = document.getElementById('card');
+
+    // 電腦 / 手機 點擊翻轉
     cardContainer.addEventListener('click', () => {
       card.classList.toggle('flipped');
     });
 
-    // 載入 metadata 並顯示背面資料
+    // 手機左右滑動翻轉
+    let startX = 0;
+    cardContainer.addEventListener('touchstart', (e) => {
+      startX = e.touches[0].clientX;
+    });
+
+    cardContainer.addEventListener('touchend', (e) => {
+      const endX = e.changedTouches[0].clientX;
+      const deltaX = endX - startX;
+
+      if (Math.abs(deltaX) > 50) {
+        card.classList.toggle('flipped');
+      }
+    });
+
+    // 載入 metadata 並顯示資料 + 連結
     fetch('metadata.json')
       .then(response => response.json())
       .then(data => {
@@ -123,11 +150,12 @@
           ${data.attributes.map(attr => `
             <p><strong>${attr.trait_type}:</strong> ${attr.value}</p>
           `).join('')}
+          <a href="fill.html" target="_blank" class="link-button">填寫學習歷程</a>
         `;
         metadata.innerHTML = content;
       })
       .catch(error => {
-        document.getElementById('metadata-text').innerHTML = '<p>❌ 無法載入 metadata.json</p>';
+        document.getElementById('metadata-text').innerHTML = '<p>無法載入 metadata.json</p>';
         console.error('錯誤:', error);
       });
   </script>

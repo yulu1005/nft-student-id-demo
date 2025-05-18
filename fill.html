@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <title>學習歷程填寫頁面</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background-color: #f5f5f5;
+      padding: 40px;
+      max-width: 700px;
+      margin: auto;
+    }
+    h1 {
+      text-align: center;
+      color: #2c3e50;
+    }
+    label {
+      font-weight: bold;
+      display: block;
+      margin-top: 20px;
+    }
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+    }
+    button {
+      margin-top: 30px;
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #2c3e50;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .saved {
+      margin-top: 20px;
+      background: #e0ffe0;
+      padding: 10px;
+      border-radius: 6px;
+      color: #2e7d32;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <h1>📚 學習歷程填寫</h1>
+
+  <label for="name">姓名：</label>
+  <input type="text" id="name" placeholder="例如：黃伃菉">
+
+  <label for="studentId">學號：</label>
+  <input type="text" id="studentId" placeholder="例如：410888888">
+
+  <label for="history">學習歷程內容：</label>
+  <textarea id="history" rows="8" placeholder="請在此輸入課程心得、競賽紀錄、實習經驗等..."></textarea>
+
+  <button onclick="saveHistory()">儲存紀錄</button>
+
+  <div class="saved" id="savedBox">✅ 已儲存至瀏覽器（localStorage）</div>
+
+  <script>
+    function saveHistory() {
+      const name = document.getElementById('name').value.trim();
+      const id = document.getElementById('studentId').value.trim();
+      const content = document.getElementById('history').value.trim();
+
+      if (!name || !id || !content) {
+        alert("請完整填寫所有欄位！");
+        return;
+      }
+
+      const record = {
+        name: name,
+        studentId: id,
+        history: content,
+        timestamp: new Date().toLocaleString()
+      };
+
+      localStorage.setItem('learningHistory', JSON.stringify(record));
+      document.getElementById('savedBox').style.display = 'block';
+    }
+  </script>
+</body>
+</html>
