@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
@@ -12,12 +13,13 @@
       height: 100vh;
       margin: 0;
       font-family: sans-serif;
-      touch-action: pan-y;
     }
+
     .card-container {
       perspective: 1000px;
       cursor: pointer;
     }
+
     .card {
       width: 280px;
       height: 400px;
@@ -25,9 +27,11 @@
       transition: transform 0.8s;
       position: relative;
     }
+
     .card.flipped {
       transform: rotateY(180deg);
     }
+
     .card-side {
       width: 100%;
       height: 100%;
@@ -43,24 +47,20 @@
       padding: 20px;
       box-sizing: border-box;
     }
-    .card-front {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      padding: 30px;
-    }
+
     .card-front img {
       width: 200px;
       border-radius: 10px;
-      margin-top: 20px;
+      margin-bottom: 20px;
     }
+
     .card-back {
       transform: rotateY(180deg);
       position: relative;
       overflow: hidden;
       text-align: center;
     }
+
     .card-back img.bg-logo {
       position: absolute;
       top: 50%;
@@ -71,36 +71,32 @@
       z-index: 0;
       pointer-events: none;
     }
+
     #metadata-text {
       position: relative;
       z-index: 1;
     }
+
     .card-back p {
       margin: 6px 0;
     }
+
     .card-back h3 {
       margin-bottom: 10px;
-    }
-    .link-button {
-      display: inline-block;
-      margin-top: 12px;
-      padding: 8px 16px;
-      background-color: #2c3e50;
-      color: white;
-      text-decoration: none;
-      border-radius: 8px;
-      font-size: 14px;
-      cursor: default;
     }
   </style>
 </head>
 <body>
   <div class="card-container" id="card-container">
     <div class="card" id="card">
+      <!-- 正面 -->
       <div class="card-side card-front">
         <h2>NFT 學生證</h2>
         <img src="nft.png" alt="NFT 頭像">
+        <h3>Tamkang Student NFT #1038</h3>
       </div>
+
+      <!-- 背面 -->
       <div class="card-side card-back">
         <img src="logo.png" class="bg-logo" alt="校徽背景">
         <div id="metadata-text">
@@ -109,24 +105,16 @@
       </div>
     </div>
   </div>
+
   <script>
+    // 手機點擊翻轉
+    const cardContainer = document.getElementById('card-container');
     const card = document.getElementById('card');
-    document.getElementById('card-container').addEventListener('click', () => {
+    cardContainer.addEventListener('click', () => {
       card.classList.toggle('flipped');
     });
 
-    let startX = 0;
-    document.body.addEventListener('touchstart', (e) => {
-      startX = e.touches[0].clientX;
-    }, { passive: true });
-    document.body.addEventListener('touchend', (e) => {
-      const endX = e.changedTouches[0].clientX;
-      const deltaX = endX - startX;
-      if (Math.abs(deltaX) > 50) {
-        card.classList.toggle('flipped');
-      }
-    });
-
+    // 載入 metadata 並顯示背面資料
     fetch('metadata.json')
       .then(response => response.json())
       .then(data => {
@@ -136,12 +124,11 @@
           ${data.attributes.map(attr => `
             <p><strong>${attr.trait_type}:</strong> ${attr.value}</p>
           `).join('')}
-          <a href="#" onclick="event.preventDefault();" class="link-button" title="此為展示用按鈕">✏️ 填寫學習歷程</a>
         `;
         metadata.innerHTML = content;
       })
       .catch(error => {
-        document.getElementById('metadata-text').innerHTML = '<p>❌ 無法載入 metadata.json</p>';
+        document.getElementById('metadata-text').innerHTML = '<p>無法載入 metadata.json</p>';
         console.error('錯誤:', error);
       });
   </script>
