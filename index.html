@@ -99,16 +99,13 @@
     const card = document.getElementById('card');
     const container = document.getElementById('card-container');
 
-    // 點擊翻轉（電腦）
     container.addEventListener('click', () => {
       card.classList.toggle('flipped');
     });
 
-    // 滑動翻轉（手機與電腦）
     let startX = 0;
     let isDragging = false;
 
-    // 手機滑動
     document.body.addEventListener('touchstart', (e) => {
       startX = e.touches[0].clientX;
     }, { passive: true });
@@ -121,7 +118,6 @@
       }
     });
 
-    // 滑鼠拖動模擬滑動（電腦）
     container.addEventListener('mousedown', (e) => {
       isDragging = true;
       startX = e.clientX;
@@ -138,7 +134,6 @@
       }
     });
 
-    // 載入 metadata
     fetch('metadata.json')
       .then(response => response.json())
       .then(data => {
@@ -148,6 +143,9 @@
           ${data.attributes.map(attr => `
             <p><strong>${attr.trait_type}:</strong> ${attr.value}</p>
           `).join('')}
+          <p><strong>Status:</strong> ${data.status}</p>
+          <p><strong>Issued At:</strong> ${data.issued_at}</p>
+          <p><strong>Wallet:</strong> ${data.wallet}</p>
         `;
         metadata.innerHTML = content;
       })
