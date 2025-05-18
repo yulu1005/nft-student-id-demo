@@ -1,7 +1,6 @@
 {
   "name": "黃鹿鹿 / LU-LU Huang",
   "description": "Tamkang Student NFT #1038",
-  "image": "./nft.png",
   "attributes": [
     { "trait_type": "Student ID", "value": "410888888" },
     { "trait_type": "College", "value": "商管學院" },
