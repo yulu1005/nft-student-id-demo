@@ -1,94 +1,71 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-Hant">
 <head>
   <meta charset="UTF-8">
-  <title>NFT 學生證翻轉卡片</title>
+  <title>Tamkang NFT Card</title>
   <style>
-    body { background:#eee; display:flex; justify-content:center; align-items:center; height:100vh; font-family:sans-serif; }
-    .card-container { perspective: 1000px; }
-    .card {
-      width: 280px; height: 400px;
-      transform-style: preserve-3d;
-      transition: transform 0.8s;
-      position: relative;
-    }
-    .card-container:hover .card {
-      transform: rotateY(180deg);
-    }
-    .card-side {
-      width: 100%; height: 100%;
-      position: absolute;
-      backface-visibility: hidden;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-      background: white;
+    body {
+      background-color: #f0f0f0;
+      font-family: sans-serif;
       display: flex;
       justify-content: center;
       align-items: center;
-      flex-direction: column;
+      height: 100vh;
+      margin: 0;
     }
-    .card-back { transform: rotateY(180deg); }
-  </style>
-</head>
-<body>
-  <div class="card-container">
-    <div class="card">
-      <div class="card-side">
-        <h2>NFT 學生證</h2>
-        <img src="nft.png" width="200" alt="NFT 頭像">
-      </div>
-      <div class="card-side card-back">
-        <h2>👩 黃小明</h2>
-        <p>資訊管理學系｜2021 入學</p>
-      </div>
-    </div>
-  </div>
-</body>
-</html>
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="UTF-8">
-  <title>NFT 學生證翻轉卡片</title>
-  <style>
-    body { background:#eee; display:flex; justify-content:center; align-items:center; height:100vh; font-family:sans-serif; }
-    .card-container { perspective: 1000px; }
+
     .card {
-      width: 280px; height: 400px;
-      transform-style: preserve-3d;
-      transition: transform 0.8s;
-      position: relative;
+      width: 320px;
+      padding: 20px;
+      background-color: white;
+      border-radius: 15px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      text-align: center;
     }
-    .card-container:hover .card {
-      transform: rotateY(180deg);
-    }
-    .card-side {
-      width: 100%; height: 100%;
-      position: absolute;
-      backface-visibility: hidden;
+
+    .card img {
+      width: 200px;
       border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-      background: white;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
+      margin-bottom: 20px;
     }
-    .card-back { transform: rotateY(180deg); }
+
+    .card h2 {
+      margin: 0 0 10px;
+    }
+
+    .card p {
+      margin: 6px 0;
+    }
+
+    .card small {
+      color: #666;
+    }
   </style>
 </head>
 <body>
-  <div class="card-container">
-    <div class="card">
-      <div class="card-side">
-        <h2>NFT 學生證</h2>
-        <img src="nft.png" width="200" alt="NFT 頭像">
-      </div>
-      <div class="card-side card-back">
-        <h2>👩 黃伃菉</h2>
-        <p>資訊管理學系｜2021 入學</p>
-      </div>
-    </div>
+  <div class="card" id="nft-card">
+    <h2>載入中...</h2>
   </div>
+
+  <script>
+    fetch('metadata.json')
+      .then(response => response.json())
+      .then(data => {
+        const card = document.getElementById('nft-card');
+        card.innerHTML = `
+          <h2>${data.name}</h2>
+          <img src="${data.image}" alt="NFT 學生證">
+          <p>${data.description}</p>
+          ${data.attributes.map(attr => `
+            <p><strong>${attr.trait_type}:</strong> ${attr.value}</p>
+          `).join('')}
+          <small>Powered by Tamkang NFT 學生證 Demo</small>
+        `;
+      })
+      .catch(error => {
+        document.getElementById('nft-card').innerHTML = '<p>❌ 無法載入 metadata.json</p>';
+        console.error('錯誤:', error);
+      });
+  </script>
 </body>
 </html>
