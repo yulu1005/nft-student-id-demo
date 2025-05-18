@@ -5,33 +5,92 @@
   <title>Tamkang NFT 學生證</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-      background-color: #f4f4f4;
-      margin: 0;
-      padding: 40px;
+      background-color: #f0f0f0;
+      font-family: sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
     }
-    img {
-      max-width: 300px;
-      border-radius: 12px;
+
+    .card-container {
+      perspective: 1000px;
     }
+
     .card {
+      width: 300px;
+      height: 420px;
+      position: relative;
+      transform-style: preserve-3d;
+      transition: transform 0.8s;
+    }
+
+    .card-container:hover .card {
+      transform: rotateY(180deg);
+    }
+
+    .card-side {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      border-radius: 15px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
       background-color: #fff;
-      border-radius: 12px;
       padding: 20px;
-      max-width: 400px;
-      margin: auto;
-      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+      box-sizing: border-box;
+    }
+
+    .card-front {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .card-front img {
+      width: 200px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+
+    .card-back {
+      transform: rotateY(180deg);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-align: center;
+      background-color: #ffffff;
+    }
+
+    .card-back h2 {
+      margin-bottom: 10px;
+    }
+
+    .card-back p {
+      margin: 4px 0;
     }
   </style>
 </head>
 <body>
-  <div class="card">
-    <h1>Tamkang Student NFT #1038</h1>
-    <img src="./nft.png" alt="NFT 學生證">
-    <p><strong>資訊管理學系</strong> | 入學年份：2021</p>
-    <p>這是由學生頭像自動生成的 NFT 學生證 Demo</p>
-    <a href="./metadata.json" target="_blank">查看 NFT Metadata</a>
+  <div class="card-container">
+    <div class="card">
+      <!-- Front Side -->
+      <div class="card-side card-front">
+        <h2>Tamkang NFT #1038</h2>
+        <img src="nft.png" alt="NFT 學生證">
+        <p>資訊管理學系</p>
+        <p>入學年份：2021</p>
+      </div>
+      <!-- Back Side -->
+      <div class="card-side card-back">
+        <h2>🔍 Metadata</h2>
+        <p><strong>Department:</strong> Information Management</p>
+        <p><strong>Year:</strong> 2021</p>
+        <p><strong>Style:</strong> Pixelated</p>
+        <a href="metadata.json" target="_blank">點我查看完整 JSON</a>
+      </div>
+    </div>
   </div>
 </body>
 </html>
