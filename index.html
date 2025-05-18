@@ -177,7 +177,7 @@
       .then(data => {
         const metadata = document.getElementById('metadata-text');
         const content = `
-          <h3>${data.name}</h3>
+          <p><strong>姓名:</strong> ${data.name}</p>
           ${data.attributes.map(attr => `
             <p><strong>${attr.trait_type}:</strong> ${attr.value}</p>
           `).join('')}
