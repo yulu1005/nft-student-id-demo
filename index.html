@@ -43,12 +43,6 @@
       padding: 20px;
       box-sizing: border-box;
     }
-    .card-front {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-    }
     .card-front img {
       width: 200px;
       border-radius: 10px;
@@ -85,11 +79,13 @@
 <body>
   <div class="card-container" id="card-container">
     <div class="card" id="card">
+      <!-- 正面 -->
       <div class="card-side card-front">
         <h2>NFT 學生證</h2>
         <img src="nft.png" alt="NFT 頭像">
         <h3>Tamkang Student NFT #1038</h3>
       </div>
+      <!-- 背面 -->
       <div class="card-side card-back">
         <img src="logo.png" class="bg-logo" alt="校徽背景">
         <div id="metadata-text">
@@ -98,16 +94,25 @@
       </div>
     </div>
   </div>
+
   <script>
     const card = document.getElementById('card');
-    document.getElementById('card-container').addEventListener('click', () => {
+    const container = document.getElementById('card-container');
+
+    // 點擊翻轉（電腦）
+    container.addEventListener('click', () => {
       card.classList.toggle('flipped');
     });
 
+    // 滑動翻轉（手機與電腦）
     let startX = 0;
+    let isDragging = false;
+
+    // 手機滑動
     document.body.addEventListener('touchstart', (e) => {
       startX = e.touches[0].clientX;
     }, { passive: true });
+
     document.body.addEventListener('touchend', (e) => {
       const endX = e.changedTouches[0].clientX;
       const deltaX = endX - startX;
@@ -116,6 +121,24 @@
       }
     });
 
+    // 滑鼠拖動模擬滑動（電腦）
+    container.addEventListener('mousedown', (e) => {
+      isDragging = true;
+      startX = e.clientX;
+    });
+
+    document.addEventListener('mouseup', (e) => {
+      if (isDragging) {
+        const endX = e.clientX;
+        const deltaX = endX - startX;
+        if (Math.abs(deltaX) > 50) {
+          card.classList.toggle('flipped');
+        }
+        isDragging = false;
+      }
+    });
+
+    // 載入 metadata
     fetch('metadata.json')
       .then(response => response.json())
       .then(data => {
