@@ -55,7 +55,25 @@
 
     .card-back {
       transform: rotateY(180deg);
+      position: relative;
+      overflow: hidden;
       text-align: center;
+    }
+
+    .card-back img.bg-logo {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 80%;
+      opacity: 0.08;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    #metadata-text {
+      position: relative;
+      z-index: 1;
     }
 
     .card-back p {
@@ -78,19 +96,29 @@
       </div>
 
       <!-- 背面 -->
-      <div class="card-side card-back" id="metadata-content">
-        <h3>🔍 Metadata 載入中...</h3>
+      <div class="card-side card-back">
+        <img src="logo.png" class="bg-logo" alt="校徽背景">
+        <div id="metadata-text">
+          <h3>🔍 Metadata 載入中...</h3>
+        </div>
       </div>
     </div>
   </div>
 
   <script>
-    // 動態載入 metadata
+    // 手機點擊翻轉 + 電腦 hover 支援
+    const cardContainer = document.getElementById('card-container');
+    const card = document.getElementById('card');
+    cardContainer.addEventListener('click', () => {
+      card.classList.toggle('flipped');
+    });
+
+    // 載入 metadata.json
     fetch('metadata.json')
       .then(response => response.json())
       .then(data => {
-        const container = document.getElementById('metadata-content');
-        container.innerHTML = `
+        const metadata = document.getElementById('metadata-text');
+        metadata.innerHTML = `
           <h3>${data.name}</h3>
           ${data.attributes.map(attr => `
             <p><strong>${attr.trait_type}:</strong> ${attr.value}</p>
@@ -98,17 +126,9 @@
         `;
       })
       .catch(error => {
-        document.getElementById('metadata-content').innerHTML = '<p>❌ 無法載入 metadata.json</p>';
+        document.getElementById('metadata-text').innerHTML = '<p>❌ 無法載入 metadata.json</p>';
         console.error('錯誤:', error);
       });
-
-    // 手機點擊也能翻轉
-    const cardContainer = document.getElementById('card-container');
-    const card = document.getElementById('card');
-
-    cardContainer.addEventListener('click', () => {
-      card.classList.toggle('flipped');
-    });
   </script>
 </body>
 </html>
