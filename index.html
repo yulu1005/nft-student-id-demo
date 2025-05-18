@@ -74,6 +74,13 @@
     .card-back h3 {
       margin-bottom: 10px;
     }
+    .wallet-barcode {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      width: 100px;
+      opacity: 0.9;
+    }
   </style>
 </head>
 <body>
@@ -83,7 +90,7 @@
       <div class="card-side card-front">
         <h2>NFT 學生證</h2>
         <img src="nft.png" alt="NFT 頭像">
-        <h3>Tamkang Student NFT #1038</h3>
+        <h3>Tamkang Student #1038</h3>
       </div>
       <!-- 背面 -->
       <div class="card-side card-back">
@@ -91,6 +98,7 @@
         <div id="metadata-text">
           <h3>🔍 Metadata 載入中...</h3>
         </div>
+        <img src="wallet_barcode.png" class="wallet-barcode" alt="Wallet Barcode">
       </div>
     </div>
   </div>
@@ -143,9 +151,6 @@
           ${data.attributes.map(attr => `
             <p><strong>${attr.trait_type}:</strong> ${attr.value}</p>
           `).join('')}
-          <p><strong>Status:</strong> ${data.status}</p>
-          <p><strong>Issued At:</strong> ${data.issued_at}</p>
-          <p><strong>Wallet:</strong> ${data.wallet}</p>
         `;
         metadata.innerHTML = content;
       })
