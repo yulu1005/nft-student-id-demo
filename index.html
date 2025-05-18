@@ -42,17 +42,33 @@
       background: white;
       display: flex;
       flex-direction: column;
-      justify-content: center;
+      justify-content: space-between;
       align-items: center;
       padding: 20px;
       box-sizing: border-box;
     }
 
-    .card-front img {
+    .card-front {
+      justify-content: space-between;
+    }
+
+    .card-front .nft-image {
       width: 100%;
-      max-width: 360px;
+      max-width: 320px;
       border-radius: 20px;
-      margin-bottom: 20px;
+      object-fit: contain;
+    }
+
+    .card-front .title {
+      margin: 10px 0;
+      text-align: center;
+    }
+
+    .wallet-barcode {
+      width: 200px;
+      height: auto;
+      margin-bottom: 10px;
+      opacity: 0.92;
       object-fit: contain;
     }
 
@@ -87,14 +103,6 @@
       margin-bottom: 10px;
     }
 
-    .wallet-barcode {
-        width: 140px;
-        height: auto;
-        margin-top: 10px;
-        opacity: 0.92;
-        object-fit: contain;
-    }
-
   </style>
 </head>
 <body>
@@ -102,8 +110,8 @@
     <div class="card" id="card">
       <!-- 正面 -->
       <div class="card-side card-front">
-        <img src="nft.png" alt="NFT 頭像">
-        <h2>Tamkang Student NFT #1038</h2>
+        <img src="nft.png" alt="NFT 頭像" class="nft-image">
+        <h2 class="title">Tamkang Student NFT #1038</h2>
         <img src="wallet_barcode.png" class="wallet-barcode" alt="Wallet Barcode">
       </div>
 
