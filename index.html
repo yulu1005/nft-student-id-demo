@@ -105,7 +105,7 @@
     </div>
   </div>
 
- <script>
+<script>
   // 手機點擊翻轉
   const cardContainer = document.getElementById('card-container');
   const card = document.getElementById('card');
@@ -118,13 +118,14 @@
     .then(response => response.json())
     .then(data => {
       const metadata = document.getElementById('metadata-text');
-      metadata.innerHTML = `
+      const content = `
         <h3>${data.name}</h3>
         <p><strong>${data.description}</strong></p>
-        ${data.attributes.map(attr => `
-          <p><strong>${attr.trait_type}:</strong> ${attr.value}</p>
-        `).join('')}
+        ${data.attributes.map(attr => {
+          return `<p><strong>${attr.trait_type}:</strong> ${attr.value}</p>`;
+        }).join('')}
       `;
+      metadata.innerHTML = content;
     })
     .catch(error => {
       document.getElementById('metadata-text').innerHTML = '<p>❌ 無法載入 metadata.json</p>';
