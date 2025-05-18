@@ -1,0 +1,10 @@
+{
+  "name": "Tamkang Student NFT #1038",
+  "description": "資訊管理學系 2021 級 NFT 學生證，由學生頭像像素化生成。",
+  "image": "./nft.png",
+  "attributes": [
+    { "trait_type": "Department", "value": "Information Management" },
+    { "trait_type": "Year", "value": "2021" },
+    { "trait_type": "Style", "value": "Pixelated" }
+  ]
+}
