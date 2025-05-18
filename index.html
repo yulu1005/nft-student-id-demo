@@ -105,30 +105,31 @@
     </div>
   </div>
 
-  <script>
-    // 手機點擊翻轉 + 電腦 hover 支援
-    const cardContainer = document.getElementById('card-container');
-    const card = document.getElementById('card');
-    cardContainer.addEventListener('click', () => {
-      card.classList.toggle('flipped');
-    });
+ <script>
+  // 手機點擊翻轉
+  const cardContainer = document.getElementById('card-container');
+  const card = document.getElementById('card');
+  cardContainer.addEventListener('click', () => {
+    card.classList.toggle('flipped');
+  });
 
-    // 載入 metadata.json
-    fetch('metadata.json')
-      .then(response => response.json())
-      .then(data => {
-        const metadata = document.getElementById('metadata-text');
-        metadata.innerHTML = `
-          <h3>${data.name}</h3>
-          ${data.attributes.map(attr => `
-            <p><strong>${attr.trait_type}:</strong> ${attr.value}</p>
-          `).join('')}
-        `;
-      })
-      .catch(error => {
-        document.getElementById('metadata-text').innerHTML = '<p>❌ 無法載入 metadata.json</p>';
-        console.error('錯誤:', error);
-      });
-  </script>
+  // 載入 metadata 並顯示背面資料
+  fetch('metadata.json')
+    .then(response => response.json())
+    .then(data => {
+      const metadata = document.getElementById('metadata-text');
+      metadata.innerHTML = `
+        <h3>${data.name}</h3>
+        <p><strong>${data.description}</strong></p>
+        ${data.attributes.map(attr => `
+          <p><strong>${attr.trait_type}:</strong> ${attr.value}</p>
+        `).join('')}
+      `;
+    })
+    .catch(error => {
+      document.getElementById('metadata-text').innerHTML = '<p>❌ 無法載入 metadata.json</p>';
+      console.error('錯誤:', error);
+    });
+</script>
 </body>
 </html>
