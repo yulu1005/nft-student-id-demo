@@ -2,6 +2,7 @@
 <html lang="zh-Hant">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>NFT 學生證</title>
   <style>
     body {
@@ -142,6 +143,32 @@
       font-size: 1.1em;
       letter-spacing: 1px;
       text-shadow: 0 2px 8px #fff, 0 1px 2px #00eaff33;
+    }
+
+    @media (max-width: 600px) {
+      .card {
+        width: 95vw;
+        height: auto;
+        min-height: 340px;
+        padding-bottom: 16px;
+      }
+      .card-front img {
+        width: 70vw;
+        max-width: 90%;
+      }
+      .wallet-barcode {
+        width: 40vw;
+        max-width: 90%;
+      }
+      .nft-badge {
+        top: 8px;
+        right: 8px;
+        font-size: 0.85em;
+        padding: 2px 8px;
+      }
+      .card-container {
+        margin-top: 12px;
+      }
     }
   </style>
 </head>
