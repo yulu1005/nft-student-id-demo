@@ -91,9 +91,13 @@
     }
 
     .card-front img {
-      width: 240px;  
+      width: 100%;
+      max-width: 240px;
+      height: auto;
       border-radius: 20px;
       margin-bottom: 30px;
+      object-fit: contain; /* 讓圖片完整顯示 */
+      display: block;
     }
 
     .card-back {
@@ -154,8 +158,11 @@
         padding-bottom: 16px;
       }
       .card-front img {
-        width: 70vw;
-        max-width: 90%;
+        width: 90vw;
+        max-width: 95%;
+        height: auto;
+        margin-bottom: 18px;
+        object-fit: contain;
       }
       .wallet-barcode {
         width: 40vw;
