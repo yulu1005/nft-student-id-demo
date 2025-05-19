@@ -7,6 +7,7 @@
     body {
       background: #eee;
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
       height: 100vh;
@@ -15,7 +16,6 @@
       touch-action: pan-y;
     }
 
-    /* 新增影片背景樣式 */
     #bg-video {
       position: fixed;
       top: 0;
@@ -32,6 +32,7 @@
     .card-container {
       perspective: 1000px;
       cursor: pointer;
+      margin-top: 40px;
     }
 
     .card-container:hover .card {
@@ -40,16 +41,32 @@
     }
 
     .card {
-        width: 360px;
-        height: 520px;
-        transform-style: preserve-3d;
-        transition: transform 0.8s, box-shadow 0.4s;
-        position: relative;
-        box-shadow: 0 0 24px 2px #00eaff88, 0 4px 24px rgba(0,0,0,0.2);
-        border: 2px solid #00eaff;
-        border-radius: 16px;
+      width: 360px;
+      height: 520px;
+      transform-style: preserve-3d;
+      transition: transform 0.8s, box-shadow 0.4s;
+      position: relative;
+      box-shadow: 0 0 24px 2px #00eaff88, 0 4px 24px rgba(0,0,0,0.2);
+      border: 2px solid #00eaff;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.95);
+      overflow: hidden;
     }
 
+    .nft-badge {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: #00eaff;
+      color: #fff;
+      font-size: 0.95em;
+      font-weight: bold;
+      padding: 4px 12px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px #00eaff44;
+      letter-spacing: 1px;
+      z-index: 2;
+    }
 
     .card.flipped {
       transform: rotateY(180deg);
@@ -72,12 +89,10 @@
     }
 
     .card-front img {
-        width: 240px;  
-        border-radius: 20px;
-        margin-bottom: 30px;
+      width: 240px;  
+      border-radius: 20px;
+      margin-bottom: 30px;
     }
-
-
 
     .card-back {
       transform: rotateY(180deg);
@@ -111,28 +126,23 @@
     }
 
     .wallet-barcode {
-        width: 140px;
-        height: auto;
-        margin-top: 10px;
-        opacity: 0.92;
-        object-fit: contain;
+      width: 140px;
+      height: auto;
+      margin-top: 10px;
+      opacity: 0.92;
+      object-fit: contain;
     }
 
-    .nft-badge {
-      position: absolute;
-      top: 16px;
-      right: 16px;
-      background: #00eaff;
-      color: #fff;
-      font-size: 0.95em;
+    /* Slogan 樣式 */
+    .nft-slogan {
+      text-align: center;
+      color: #00eaff;
       font-weight: bold;
-      padding: 4px 12px;
-      border-radius: 12px;
-      box-shadow: 0 2px 8px #00eaff44;
+      margin-top: 24px;
+      font-size: 1.1em;
       letter-spacing: 1px;
-      z-index: 2;
+      text-shadow: 0 2px 8px #fff, 0 1px 2px #00eaff33;
     }
-
   </style>
 </head>
 <body>
@@ -142,13 +152,13 @@
   </video>
   <div class="card-container" id="card-container">
     <div class="card" id="card">
+      <span class="nft-badge">NFT</span>
       <!-- 正面 -->
       <div class="card-side card-front">
         <img src="nft.png" alt="NFT 頭像">
         <h2>Tamkang Student NFT #1038</h2>
         <img src="wallet_barcode.png" class="wallet-barcode" alt="Wallet Barcode">
       </div>
-
       <!-- 背面 -->
       <div class="card-side card-back">
         <img src="logo.png" class="bg-logo" alt="校徽背景">
@@ -158,7 +168,7 @@
       </div>
     </div>
   </div>
-  <p style="text-align:center; color:#00eaff; font-weight:bold; margin-top:24px; font-size:1.1em; letter-spacing:1px;">
+  <p class="nft-slogan">
     NFT 學生證，開啟數位校園新體驗
   </p>
   <script>
