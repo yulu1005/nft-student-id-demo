@@ -152,42 +152,20 @@
 
     @media (max-width: 600px) {
       .card {
-        width: 95vw;
-        height: auto;      /* 讓高度自動 */
-        min-height: 340px;
-        padding-bottom: 16px;
-      }
-      .card-front img {
-        width: 90vw;
-        max-width: 95%;
+        width: 96vw;
+        min-width: 0;
+        min-height: 0;
         height: auto;
-        margin-bottom: 18px;
-        object-fit: contain;
+        padding-bottom: 0;
       }
+      .card-front img,
       .wallet-barcode {
-        width: 40vw;
-        max-width: 90%;
-      }
-      .nft-badge {
-        top: 8px;
-        right: 8px;
-        font-size: 0.85em;
-        padding: 2px 8px;
-      }
-      .card-container {
-        margin-top: 12px;
-      }
-      .card-front h2 {
-        font-size: 1.1em;
-        margin-bottom: 10px;
-        word-break: break-all;
-        text-align: center;
-      }
-      .nft-slogan {
-        font-size: 1em;
-        margin-top: 16px;
-        padding: 0 8px;
-        word-break: break-all;
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+        margin-bottom: 16px;
+        object-fit: contain;
+        display: block;
       }
     }
   </style>
