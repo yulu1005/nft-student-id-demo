@@ -43,7 +43,7 @@
 
     .card {
       width: 360px;
-      height: 520px;
+      min-height: 520px; /* 改這裡 */
       transform-style: preserve-3d;
       transition: transform 0.8s, box-shadow 0.4s;
       position: relative;
@@ -87,6 +87,7 @@
       align-items: center;
       padding: 20px;
       box-sizing: border-box;
+      word-break: break-all;
     }
 
     .card-front img {
@@ -148,7 +149,7 @@
     @media (max-width: 600px) {
       .card {
         width: 95vw;
-        height: auto;
+        height: auto;      /* 讓高度自動 */
         min-height: 340px;
         padding-bottom: 16px;
       }
