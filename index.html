@@ -147,18 +147,20 @@
 
     @media (max-width: 600px) {
       .card {
-        width: 95vw;
+        width: 96vw;
         height: auto;
         min-height: 340px;
         padding-bottom: 16px;
       }
       .card-front img {
-        width: 70vw;
-        max-width: 90%;
+        width: 80vw;
+        max-width: 95%;
+        margin-bottom: 18px;
       }
       .wallet-barcode {
-        width: 40vw;
-        max-width: 90%;
+        width: 60vw;
+        max-width: 95%;
+        margin-top: 8px;
       }
       .nft-badge {
         top: 8px;
@@ -167,7 +169,19 @@
         padding: 2px 8px;
       }
       .card-container {
-        margin-top: 12px;
+        margin-top: 8px;
+      }
+      .card-front h2 {
+        font-size: 1.1em;
+        margin-bottom: 10px;
+        word-break: break-all;
+        text-align: center;
+      }
+      .nft-slogan {
+        font-size: 1em;
+        margin-top: 16px;
+        padding: 0 8px;
+        word-break: break-all;
       }
     }
   </style>
@@ -250,7 +264,7 @@
         metadata.innerHTML = content;
       })
       .catch(error => {
-        document.getElementById('metadata-text').innerHTML = '<p>❌ 無法載入 metadata.json</p>';
+        document.getElementById('metadata-text').innerHTML = '<p>無法載入 metadata.json</p>';
         console.error('錯誤:', error);
       });
   </script>
