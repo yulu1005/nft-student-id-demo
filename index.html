@@ -2,8 +2,8 @@
 <html lang="zh-Hant">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>NFT 學生證</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {
       background: #eee;
@@ -87,10 +87,6 @@
       align-items: center;
       padding: 20px;
       box-sizing: border-box;
-    }
-
-    .card-front {
-      position: relative;
     }
 
     .card-front img {
@@ -198,6 +194,17 @@
         width: 32vw;
         max-width: 70px;
         min-width: 40px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .card {
+        width: 95vw;
+        height: auto;
+        min-height: 340px;
+      }
+      .card-front img {
+        width: 70vw;
       }
     }
   </style>
