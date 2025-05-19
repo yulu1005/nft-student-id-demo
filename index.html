@@ -43,8 +43,7 @@
 
     .card {
       width: 360px;
-      /* height: auto; */
-      /* min-height: 520px; 這行可以移除 */
+      height: 520px;
       transform-style: preserve-3d;
       transition: transform 0.8s, box-shadow 0.4s;
       position: relative;
@@ -92,13 +91,9 @@
     }
 
     .card-front img {
-      width: 100%;
-      max-width: 240px;
-      height: auto;
+      width: 240px;  
       border-radius: 20px;
       margin-bottom: 30px;
-      object-fit: contain; /* 讓圖片完整顯示 */
-      display: block;
     }
 
     .card-back {
