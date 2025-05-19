@@ -170,6 +170,18 @@
         margin-top: 12px;
       }
     }
+
+    .front-bg-logo {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 70%;
+      max-width: 220px;
+      transform: translate(-50%, -50%);
+      opacity: 0.10;
+      z-index: 0;
+      pointer-events: none;
+    }
   </style>
 </head>
 <body>
@@ -183,6 +195,8 @@
       <!-- 正面 -->
       <div class="card-side card-front">
         <img src="nft.png" alt="NFT 頭像">
+        <!-- 新增淡淡的 logo 浮水印 -->
+        <img src="logo.png" class="front-bg-logo" alt="校徽浮水印">
         <h2>Tamkang Student NFT #1038</h2>
         <img src="wallet_barcode.png" class="wallet-barcode" alt="Wallet Barcode">
       </div>
