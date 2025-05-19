@@ -15,18 +15,41 @@
       touch-action: pan-y;
     }
 
+    /* 新增影片背景樣式 */
+    #bg-video {
+      position: fixed;
+      top: 0;
+      left: 0;
+      min-width: 100vw;
+      min-height: 100vh;
+      width: auto;
+      height: auto;
+      z-index: -1;
+      object-fit: cover;
+      pointer-events: none;
+    }
+
     .card-container {
       perspective: 1000px;
       cursor: pointer;
     }
 
-    .card {
-      width: 400px;
-      height: 560px;
-      transform-style: preserve-3d;
-      transition: transform 0.8s;
-      position: relative;
+    .card-container:hover .card {
+      box-shadow: 0 0 40px 8px #00eaffcc, 0 8px 32px rgba(0,0,0,0.3);
+      transform: scale(1.03) perspective(1000px);
     }
+
+    .card {
+        width: 360px;
+        height: 520px;
+        transform-style: preserve-3d;
+        transition: transform 0.8s, box-shadow 0.4s;
+        position: relative;
+        box-shadow: 0 0 24px 2px #00eaff88, 0 4px 24px rgba(0,0,0,0.2);
+        border: 2px solid #00eaff;
+        border-radius: 16px;
+    }
+
 
     .card.flipped {
       transform: rotateY(180deg);
@@ -42,41 +65,25 @@
       background: white;
       display: flex;
       flex-direction: column;
+      justify-content: center;
       align-items: center;
       padding: 20px;
       box-sizing: border-box;
     }
 
-    .card-front {
-      justify-content: space-between;
+    .card-front img {
+        width: 240px;  
+        border-radius: 20px;
+        margin-bottom: 30px;
     }
 
-    .nft-image {
-      width: 100%;
-      max-width: 320px;
-      border-radius: 20px;
-      margin-top: 20px;
-      margin-bottom: 32px;
-    }
 
-    .wallet-barcode {
-      width: 200px;
-      height: auto;
-      margin-bottom: 20px;
-      margin-top: 0;
-    }
 
     .card-back {
       transform: rotateY(180deg);
       position: relative;
       overflow: hidden;
       text-align: center;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      min-height: 100%;
-      padding: 40px 20px;
     }
 
     .card-back img.bg-logo {
@@ -91,39 +98,54 @@
     }
 
     #metadata-text {
-      width: 100%;
-      max-width: 95%;
-      min-height: 320px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      background: rgba(255,255,255,0.7);
-      border-radius: 12px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-      padding: 24px 0;
+      position: relative;
+      z-index: 1;
     }
 
     .card-back p {
-      margin: 12px 0;
-      font-size: 16px;
-      line-height: 1.5;
+      margin: 6px 0;
     }
 
     .card-back h3 {
-      margin: 20px 0;
-      font-size: 20px;
-      line-height: 1.4;
+      margin-bottom: 10px;
+    }
+
+    .wallet-barcode {
+        width: 140px;
+        height: auto;
+        margin-top: 10px;
+        opacity: 0.92;
+        object-fit: contain;
+    }
+
+    .nft-badge {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: #00eaff;
+      color: #fff;
+      font-size: 0.95em;
+      font-weight: bold;
+      padding: 4px 12px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px #00eaff44;
+      letter-spacing: 1px;
+      z-index: 2;
     }
 
   </style>
 </head>
 <body>
+  <video autoplay loop muted playsinline id="bg-video">
+    <source src="background.mp4" type="video/mp4">
+    您的瀏覽器不支援影片背景
+  </video>
   <div class="card-container" id="card-container">
     <div class="card" id="card">
       <!-- 正面 -->
       <div class="card-side card-front">
-        <img src="nft.png" alt="NFT 頭像" class="nft-image">
+        <img src="nft.png" alt="NFT 頭像">
+        <h2>Tamkang Student NFT #1038</h2>
         <img src="wallet_barcode.png" class="wallet-barcode" alt="Wallet Barcode">
       </div>
 
@@ -136,7 +158,9 @@
       </div>
     </div>
   </div>
-
+  <p style="text-align:center; color:#00eaff; font-weight:bold; margin-top:24px; font-size:1.1em; letter-spacing:1px;">
+    NFT 學生證，開啟數位校園新體驗
+  </p>
   <script>
     const card = document.getElementById('card');
     const container = document.getElementById('card-container');
@@ -181,7 +205,7 @@
       .then(data => {
         const metadata = document.getElementById('metadata-text');
         const content = `
-          <p><strong>姓名:</strong> ${data.name}</p>
+          <h3>${data.name}</h3>
           ${data.attributes.map(attr => `
             <p><strong>${attr.trait_type}:</strong> ${attr.value}</p>
           `).join('')}
